@@ -1,0 +1,17 @@
+{
+  "name": "apollo-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cloudant/cloudant": "^4.2.1",
+    "apollo-server-express": "^2.9.6",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
