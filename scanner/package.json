@@ -2,7 +2,7 @@
   "name": "apollo-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "scanner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,7 @@
   "dependencies": {
     "@cloudant/cloudant": "^4.2.1",
     "apollo-server-express": "^2.9.6",
+    "node-fetch": "^2.6.0",
     "xmlhttprequest": "^1.8.0"
   }
 }
