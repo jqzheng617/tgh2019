@@ -17,10 +17,7 @@ class App extends Component {
     if (this.state.remoteDB) {
       this.syncToRemote();
       // this.getBlocks();
-<<<<<<< HEAD
-=======
       this.filter()
->>>>>>> c1ca1c0c4f0aac97538f059b25dac32fbc856d64
     }
   }
 
