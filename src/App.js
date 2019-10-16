@@ -2,35 +2,31 @@ import React, { Component } from 'react';
 import VRViz from "vr-viz";
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
+PouchDB.plugin(PouchDBFind)
 
 
 class App extends Component {
 
   state ={
-    remoteDB: new PouchDB(`${process.env.REACT_CLOUDANT_API}`),
-    localDB: new PouchDB('data'),
+    remoteDB: new PouchDB('https://2aeca32c-420b-42c5-96ef-8032e3b74711-bluemix:c4401364a26441bb9839a382f32c5965b6dd1969afd80b1cf0a4d2a704eb94dd@2aeca32c-420b-42c5-96ef-8032e3b74711-bluemix.cloudant.com/tgh2019b'),
+    localDB: new PouchDB('tgh2019b'),
     blocks: []
   }
 
   componentDidMount = () => {
     if (this.state.remoteDB) {
       this.syncToRemote();
-      this.getBlocks();
+      // this.getBlocks();
+      this.filter()
     }
-    console.log(this.state.localDB.allDocs, 'this is remoteDB')
   }
 
   getPouchDocs = (change) => {
-
     console.log(this.state.localDB, change.change.docs,  'this is get pouch')
     this.setState({
-      blocks: [...change.change.docs]
+      blocks: [this.filter()]
     })
   }
-
-  // getBlocks = () => {
-  //   this.state.localDB.sync(this.state.remoteDB, {live: true, retry: true})
-  // }
 
   syncToRemote = () => {
     this.state.localDB.sync(this.state.remoteDB, {live: true, retry: true})
@@ -41,10 +37,22 @@ class App extends Component {
     .on('error', err => console.log('uh oh! an error occured while synching.'));
     console.log(this.state.localDB, 'this is remoteDB sync ')
   }
-
+  
+  filter = () => {
+    this.state.remoteDB.allDocs({
+      include_docs: true,
+      attachments: true
+     }).then((result) => this.setState({ blocks: [...result.rows]}) 
+     ).then((result) =>  result.rows) 
+      .catch(function (err) {
+      console.log(err);
+     });
+  }
 
   render() {
+    console.log(this.state.blocks, 'this is blocks componentdidmount')
     return (
+
       <VRViz
         scene={
           {
@@ -70,7 +78,7 @@ class App extends Component {
               }
             ],
             'camera': {
-              'position': '10 0 20',
+              'position': '10 2 15',
               'rotation': '0 0 0',
             },
           }

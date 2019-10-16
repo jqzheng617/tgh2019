@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv": "^8.2.0",
     "pouchdb": "^7.1.1",
     "pouchdb-find": "^7.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-pouchdb": "^2.0.0",
     "react-scripts": "3.2.0",
+    "styled-components": "^4.4.0",
     "vr-viz": "^2.3.4"
   },
   "scripts": {
