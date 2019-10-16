@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import VRViz from "vr-viz";
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
-PouchDB.plugin(PouchDBFind)
+import {
+  Container,
+  Section1,
+  Section2,
+  BtnDiv,
+  Button,
+  Title
+} from './style.js'
 
+PouchDB.plugin(PouchDBFind)
 
 class App extends Component {
 
@@ -23,9 +31,9 @@ class App extends Component {
 
   getPouchDocs = (change) => {
     console.log(this.state.localDB, change.change.docs,  'this is get pouch')
-    this.setState({
-      blocks: [this.filter()]
-    })
+    // this.setState({
+    //   blocks: [this.filter()]
+    // })
   }
 
   syncToRemote = () => {
@@ -42,7 +50,7 @@ class App extends Component {
     this.state.remoteDB.allDocs({
       include_docs: true,
       attachments: true
-     }).then((result) => this.setState({ blocks: [...result.rows]}) 
+     }).then((result) => this.setState({ blocks: [result.rows]}) 
      ).then((result) =>  result.rows) 
       .catch(function (err) {
       console.log(err);
@@ -50,10 +58,24 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.blocks, 'this is blocks componentdidmount')
+    console.log(this.state.blocks, 'this is blocks render')
+    const divStyle = {
+      height: '100px',
+    };
     return (
-
-      <VRViz
+    <Container>
+      <Section1>
+        <Title>Casper Labs Plasma XR</Title>
+        <BtnDiv>
+          <Button>1</Button>
+          <Button>2</Button>
+          <Button>3</Button>
+          <Button>4</Button>
+          <Button>5</Button>
+        </BtnDiv>
+    </Section1>
+      <Section2>
+      <VRViz embedded style={divStyle}
         scene={
           {
             'sky': {
@@ -122,10 +144,10 @@ class App extends Component {
                     'field': 'height',
                   },
                   'fill': {
-                    'opacity': 0.8,
+                    'opacity': 1,
                     'scaleType': 'linear',
                     'field': 'height',
-                    'color': ['green', 'yellow'],
+                    'color': ['red', 'gray'],
                   },
                 },
               },
@@ -195,6 +217,8 @@ class App extends Component {
           ]
         }
     />
+    </Section2>
+     </Container>
     );
   }
 }
