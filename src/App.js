@@ -1,9 +1,48 @@
 import React, { Component } from 'react';
 import VRViz from "vr-viz";
-import './App.css';
+import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
 
 
 class App extends Component {
+
+  state ={
+    remoteDB: new PouchDB(`${process.env.REACT_CLOUDANT_API}`),
+    localDB: new PouchDB('data'),
+    blocks: []
+  }
+
+  componentDidMount = () => {
+    if (this.state.remoteDB) {
+      this.syncToRemote();
+      // this.getBlocks();
+    }
+    console.log(this.state.localDB.allDocs, 'this is remoteDB')
+  }
+
+  getPouchDocs = (change) => {
+
+    console.log(this.state.localDB, change.change.docs,  'this is get pouch')
+    this.setState({
+      blocks: [...change.change.docs]
+    })
+  }
+
+  // getBlocks = () => {
+  //   this.state.localDB.sync(this.state.remoteDB, {live: true, retry: true})
+  // }
+
+  syncToRemote = () => {
+    this.state.localDB.sync(this.state.remoteDB, {live: true, retry: true})
+    .on('change', change => {
+      console.log('---------------')
+      this.getPouchDocs(change);
+    })
+    .on('error', err => console.log('uh oh! an error occured while synching.'));
+    console.log(this.state.localDB, 'this is remoteDB sync ')
+  }
+
+
   render() {
     return (
       <VRViz
