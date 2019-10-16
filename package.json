@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "pouchdb": "^7.1.1",
+    "pouchdb-find": "^7.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-pouchdb": "^2.0.0",
