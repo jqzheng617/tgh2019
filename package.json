@@ -5,10 +5,6 @@
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-<<<<<<< HEAD
-    "react-pouchdb": "^2.0.0",
-=======
->>>>>>> c8395cbb08c28961d492eb7ab22e88f8be1494e5
     "react-scripts": "3.2.0",
     "vr-viz": "^2.3.4"
   },
