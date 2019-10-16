@@ -1,151 +1,155 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import VRViz from "vr-viz";
 import './App.css';
-import VRViz from "vr-viz"
 
-function App() {
-  return (
-    <div className="App">
-    <VRViz
-    scene={
-      {
-        'sky': {
-          'style': {
-            'color': '#333',
-            'texture': false,
-          }
-        },
-        'lights': [
+
+class App extends Component {
+  render() {
+    return (
+      <VRViz
+        scene={
           {
-            'type': 'directional',
-            'color': '#fff',
-            'position': '0 1 1',
-            'intensity': 1,
-            "decay": 1,
-          },
-          {
-            'type': 'ambient',
-            'color': '#fff',
-            'intensity': 1,
-            "decay": 1,
-          }
-        ],
-        'camera': {
-          'position': '10.5 5.5 11',
-          'rotation': '0 0 0',
-        },
-      }
-    }
-    graph={
-      [
-        {
-          'type': 'SurfacePlot',
-          'style': {
-            'origin': [0, 6, 0],
-            'dimensions': {
-              'width': 10,
-              'height': 5,
-              'depth': 10,
-            },
-          },
-          'mark': {
-            'type': 'plane',
-            'position': {
-              'x': {
-                'scaleType': 'linear',
-                'domain': [0, 2 * Math.PI],
-                'steps': 50,
-              },
-              'y': {
-                'scaleType': 'linear',
-                'function': (x, z) => x * Math.sin(x) - z * Math.cos(z),
-              },
-              'z': {
-                'scaleType': 'linear',
-                'domain': [0, 2 * Math.PI],
-                'steps': 50,
+            'sky': {
+              'style': {
+                'color': '#333',
+                'texture': false,
               }
             },
-            'style': {
-              'fill': {
-                'scaleType': 'linear',
-                'function': (x, z) => x * z,
-                'color': ['#DB4437', '#0f9d58'],
-                'opacity': 1,
+            'lights': [
+              {
+                'type': 'directional',
+                'color': '#fff',
+                'position': '0 1 1',
+                'intensity': 1,
+                'decay': 1,
               },
-            }
-          },
-          'axis': {
-            'axis-box': {
-              'color': 'black',
-            },
-            'x-axis': {
-              'orient': 'bottom-back',
-              'title': {
-                'text': '',
-                'fontSize': 10,
-                'color': 'black',
-                'opacity': 1,
-              },
-              'ticks': {
-                'noOfTicks': 10,
-                'size': 0.1,
-                'color': 'black',
-                'opacity': 1,
-                'fontSize': 10,
-              },
-              'grid': {
-                'color': 'black',
-                'opacity': 1,
+              {
+                'type': 'ambient',
+                'color': '#fff',
+                'intensity': 1,
+                'decay': 1,
               }
+            ],
+            'camera': {
+              'position': '10 0 20',
+              'rotation': '0 0 0',
             },
-            'y-axis': {
-              'orient': 'bottom-back',
-              'title': {
-                'text': '',
-                'fontSize': 10,
-                'color': 'black',
-                'opacity': 1,
-              },
-              'ticks': {
-                'noOfTicks': 10,
-                'size': 0.1,
-                'color': 'black',
-                'opacity': 1,
-                'fontSize': 10,
-              },
-              'grid': {
-                'color': 'black',
-                'opacity': 1,
-              }
-            },
-            'z-axis': {
-              'orient': 'bottom-back',
-              'title': {
-                'text': '',
-                'fontSize': 10,
-                'color': 'black',
-                'opacity': 1,
-              },
-              'ticks': {
-                'noOfTicks': 10,
-                'size': 0.1,
-                'color': 'black',
-                'opacity': 1,
-                'fontSize': 10,
-              },
-              'grid': {
-                'color': 'black',
-                'opacity': 1,
-              }
-            }
           }
         }
-      ]
-    }
-  />
-    </div>
-  );
+        graph={
+          [
+            {
+              'type': 'BarGraph',
+              'data': {
+                'dataFile': 'data.json',
+                'fileType': 'json',
+              },
+              'style': {
+                'origin': [0, 0, 0],
+                'dimensions': {
+                  'width': 20,
+                  'height': 5,
+                  'depth': 10,
+                },
+              },
+              'mark': {
+                'type': 'box',
+                'position': {
+                  'x': {
+                    'scaleType': 'ordinal',
+                    'field': 'x',
+                  },
+                  'z': {
+                    'scaleType': 'ordinal',
+                    'field': 'z',
+                  }
+                },
+                'style': {
+                  'padding': {
+                    'x': 0.1,
+                    'z': 0.1,
+                  },
+                  'height': {
+                    'scaleType': 'linear',
+                    'startFromZero': true,
+                    'field': 'height',
+                  },
+                  'fill': {
+                    'opacity': 0.8,
+                    'scaleType': 'linear',
+                    'field': 'height',
+                    'color': ['green', 'yellow'],
+                  },
+                },
+              },
+              'axis': {
+                'x-axis': {
+                  'orient': 'back-bottom',
+                  'title': {
+                    'value': '',
+                    'fontSize': 3,
+                    'color': 'white',
+                    'opacity': 0.7,
+                  },
+                  'ticks': {
+                    'noOfTicks': 10,
+                    'size': 0.01,
+                    'color': 'white',
+                    'opacity': 0.7,
+                    'fontSize': 3,
+                  },
+                  'grid': {
+                    'color': 'white',
+                    'opacity': 0.7,
+                  }
+                },
+                'y-axis': {
+                  'orient': 'back-left',
+                  'title': {
+                    'value': '',
+                    'fontSize': 3,
+                    'color': 'white',
+                    'opacity': 0.7,
+                  },
+                  'ticks': {
+                    'noOfTicks': 10,
+                    'size': 0.01,
+                    'color': 'white',
+                    'opacity': 0.7,
+                    'fontSize': 3,
+                  },
+                  'grid': {
+                    'color': 'white',
+                    'opacity': 0.7,
+                  }
+                },
+                'z-axis': {
+                  'orient': 'bottom-left',
+                  'title': {
+                    'value': '',
+                    'fontSize': 3,
+                    'color': 'white',
+                    'opacity': 0.7,
+                  },
+                  'ticks': {
+                    'noOfTicks': 10,
+                    'size': 0.01,
+                    'color': 'white',
+                    'opacity': 0.7,
+                    'fontSize': 3,
+                  },
+                  'grid': {
+                    'color': 'white',
+                    'opacity': 0.7,
+                  }
+                }
+              }
+            }
+          ]
+        }
+    />
+    );
+  }
 }
 
 export default App;
