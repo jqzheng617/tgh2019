@@ -82,8 +82,8 @@ class App extends Component {
       <Section1>
         <Title>Casper Labs Plasma XR</Title>
         <BtnDiv>
-          <Button onClick={() => this.switchDataTen()}>Last 10 Transactions</Button>
-          <Button onClick={() => this.switchDataTwenty()}>Last 25 Transactions</Button>
+          <Button onClick={() => this.switchDataTen()}>Today</Button>
+          <Button onClick={() => this.switchDataTwenty()}>This Week</Button>
         </BtnDiv>
     </Section1>
     <Section2>
