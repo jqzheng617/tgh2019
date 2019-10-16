@@ -60,9 +60,15 @@ class App extends Component {
      });
   }
 
-  switchData = () => {
+  switchDataTen = () => {
     this.setState({
-      toggle: !this.state.toggle
+      toggle: true
+    })
+  }
+
+  switchDataTwenty = () => {
+    this.setState({
+      toggle: false
     })
   }
 
@@ -76,11 +82,8 @@ class App extends Component {
       <Section1>
         <Title>Casper Labs Plasma XR</Title>
         <BtnDiv>
-          <Button onClick={() => this.switchData()}>1</Button>
-          <Button>2</Button>
-          <Button>3</Button>
-          <Button>4</Button>
-          <Button>5</Button>
+          <Button onClick={() => this.switchDataTen()}>Last 10 Transactions</Button>
+          <Button onClick={() => this.switchDataTwenty()}>Last 25 Transactions</Button>
         </BtnDiv>
     </Section1>
     <Section2>
